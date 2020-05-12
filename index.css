@@ -15,7 +15,7 @@ body {
   filter: invert();
 }
 
-#location {
+#location, #test, #weather, button {
   margin: 2em;
 }
 

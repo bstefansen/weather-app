@@ -1,31 +1,31 @@
 var url = "https://fcc-weather-api.glitch.me/api/current?";
 var urlTest = "https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139";
-var lon;
-var lat;
+var newURL;
 
-async function getLocation() {
+var getLocation = new Promise((resolve) => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      document.getElementById('location').innerHTML = "latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude;
-      lon = position.coords.longitude;
-      lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      let lat = position.coords.latitude;
+      document.getElementById('location').innerHTML = "latitude: " + lat + "<br>longitude: " + lon;
+      newURL = url + 'lat=' + lat + '&lon=' + lon;
     });
   }
-}
 
-async function getWeather() {
-  return fetch(url + 'lat=' + lat + '&lon=' + lon)
+  resolve();
+})
+
+// newURL is undefined but urlTest works
+var getWeather = 
+  fetch(/*urlTest/ newURL*/)
     .then(res => res.json())
-    .then(data => document.getElementById('weather').innerHTML = data.name)
-}
-
-// await is not working
+    .then(data => JSON.stringify(data))
+    
 async function App() {
-  
-  await Promise.all([
-    (async()=>await getLocation())(),
-    (async()=>await getWeather())()
-  ])
+  const location = await getLocation;
+  const weather = await getWeather;
+  document.getElementById('test').innerHTML = newURL
+  document.getElementById('weather').innerHTML = weather
 }
 
 App()
