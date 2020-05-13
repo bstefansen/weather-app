@@ -8,21 +8,22 @@ var getLocation = new Promise((resolve) => {
       let lon = position.coords.longitude;
       let lat = position.coords.latitude;
       document.getElementById('location').innerHTML = "latitude: " + lat + "<br>longitude: " + lon;
-      newURL = url + 'lat=' + lat + '&lon=' + lon;
     });
   }
 
   resolve();
+  return { lon, lat };
 })
+newURL = url + 'lat=' + getLocation.lat + '&lon=' + getLocation.lon;
 
 // newURL is undefined but urlTest works
 var getWeather = 
-  fetch(/*urlTest/ newURL*/)
+  fetch(urlTest)
     .then(res => res.json())
     .then(data => JSON.stringify(data))
     
 async function App() {
-  const location = await getLocation;
+  await getLocation;
   const weather = await getWeather;
   document.getElementById('test').innerHTML = newURL
   document.getElementById('weather').innerHTML = weather
