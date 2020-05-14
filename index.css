@@ -33,3 +33,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+#toggle {
+  font-size: large;
+}

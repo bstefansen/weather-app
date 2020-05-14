@@ -1,21 +1,21 @@
 var url = "https://fcc-weather-api.glitch.me/api/current?";
+var toggle = false;
 
 var getLocation = () => {
   return new Promise(resolve => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        let lon = position.coords.longitude;
-        let lat = position.coords.latitude;
+        let lat = Math.round(position.coords.latitude * 1000) / 1000;
+        let lon = Math.round(position.coords.longitude * 1000) / 1000;
         document.getElementById('location').innerHTML = "latitude: " + lat + "<br>longitude: " + lon;
         resolve(url + 'lat=' + lat + '&lon=' + lon);
       });
     } else {
-      resolve();
+      resolve('no data');
     }
   });
 }
 
-// newURL is undefined but urlTest works
 var getWeather = async(url) => {
   const res = await fetch(url);
   const json = await res.json();
@@ -26,13 +26,20 @@ async function App() {
   const location = await getLocation();
   const weather = await getWeather(location);
 
-  var weatherData = [
-    weather.name, weather.main.temp, weather.weather[0].description
-  ]
+  var name = weather.name;
+  var temp = weather.main.temp;
+  var desc = weather.weather[0].description;
+  
+  toggle = !toggle;
 
-  weatherData[1] = weatherData[1] + "&degC"
+  if(toggle) {
+    temp = Math.round((temp * (9/5)) + 32) + "°F";
+  } else {
+    temp = temp + "°C";
+  }
+
   document.getElementById('URL').innerHTML = location
-  document.getElementById('weather').innerHTML = weatherData.join(', ')
+  document.getElementById('weather').innerText = name + '\n\n' + temp + '\n\n' + desc
 }
 
 App()
