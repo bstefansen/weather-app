@@ -1,6 +1,7 @@
 var url = "https://fcc-weather-api.glitch.me/api/current?";
 var toggle = false;
 
+// lon has issues with neg numbers. convert coordinates?
 var getLocation = () => {
   return new Promise(resolve => {
     if (navigator.geolocation) {
@@ -29,7 +30,7 @@ async function App() {
   var name = weather.name;
   var temp = weather.main.temp;
   var desc = weather.weather[0].description;
-  
+
   toggle = !toggle;
 
   if(toggle) {
