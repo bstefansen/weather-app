@@ -39,6 +39,15 @@ async function App() {
     temp = temp + "°C";
   }
 
+  var cloudRegex = /.cloud./;
+  var rainRegex = /.rain/;
+
+  if(cloudRegex.test(desc)) {
+    document.getElementById('image').src = "images/cloud.png"
+  } else if(rainRegex.test(desc)){
+    document.getElementById('image').src = "images/rain.png"
+  }
+
   document.getElementById('URL').innerHTML = location
   document.getElementById('weather').innerText = name + '\n\n' + temp + '\n\n' + desc
 }
