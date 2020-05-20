@@ -41,11 +41,14 @@ async function App() {
 
   var cloudRegex = /.cloud./;
   var rainRegex = /.rain/;
+  var clearRegex = /clear/;
 
   if(cloudRegex.test(desc)) {
     document.getElementById('image').src = "images/cloud.png"
   } else if(rainRegex.test(desc)){
     document.getElementById('image').src = "images/rain.png"
+  } else if(clearRegex.test(desc)) {
+    document.getElementById('image').src = "images/sun.png"
   }
 
   document.getElementById('URL').innerHTML = location

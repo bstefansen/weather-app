@@ -28,6 +28,45 @@ body {
   width: 5em;
 }
 
+#image[src^="images/sun.png"] {
+  animation-name: spin;
+  animation-duration: 10000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+}
+
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+#image[src^="images/cloud.png"] {
+  animation-name: fade;
+  animation-duration: 1800ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+}
+
+@keyframes fade {
+  0% {
+      opacity: 1;
+      transform: translateX(-10px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+}
+
 footer {
   position: absolute;
   bottom: 3em;
