@@ -4,7 +4,7 @@ A web app that fetches API weather data for the user's current location
 ![Weather App Screenshot](https://bstefansen.github.io/Portfolio/images/weather.JPG)
 
 ## Why
-I built this project to better understand API data fetching and asynchronous functions
+I built this project to better understand API data and asynchronous functions
 
 ## Features
 - Users can switch between celcius and fahrenheit
